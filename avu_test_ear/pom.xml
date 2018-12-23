@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>avu_test_2</artifactId>
+        <groupId>com.hwx</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>ear</packaging>
+
+    <artifactId>avu_test_ear</artifactId>
+
+    <dependencies>
+        <!-- WAR dependencies -->
+        <dependency>
+            <groupId>com.hwx</groupId>
+            <artifactId>avu_test_broker</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hwx</groupId>
+            <artifactId>avu_test_consumer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.activemq.tooling</groupId>
+                <artifactId>maven-activemq-plugin</artifactId>
+                <version>${activemq.version}</version>
+                <configuration>
+                    <fork>false</fork>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <modules>
+
+                        <webModule>
+                            <groupId>com.hwx</groupId>
+                            <artifactId>avu_test_broker</artifactId>
+                            <contextRoot>broker</contextRoot>
+
+                        </webModule>
+
+                        <webModule>
+                            <groupId>com.hwx</groupId>
+                            <artifactId>avu_test_consumer</artifactId>
+                            <contextRoot>consumer</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>
