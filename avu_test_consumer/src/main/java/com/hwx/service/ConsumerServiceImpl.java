@@ -20,4 +20,11 @@ public class ConsumerServiceImpl implements ConsumerService {
     public List<Message> getMessages() {
         return consumerRepository.getMessages();
     }
+
+    @Override
+    public void putMessage(Message message) {
+        consumerRepository.putMessage(message);
+    }
+
+
 }

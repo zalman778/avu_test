@@ -2,6 +2,7 @@ package com.hwx.jms;
 
 import com.hwx.model.Message;
 import com.hwx.repository.ConsumerRepository;
+import com.hwx.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,15 +16,15 @@ import javax.xml.bind.JAXBException;
  */
 @Component
 public class MessageConsumer implements MessageListener {
+
     @Autowired
-    ConsumerRepository consumerRepository;
+    ConsumerService consumerService;
 
     @Override
     public void onMessage(javax.jms.Message message) {
         try {
             String xmlMessage = ((TextMessage)message).getText();
-            consumerRepository.putMessage(Message.parseXml(xmlMessage));
-
+            consumerService.putMessage(Message.parseXml(xmlMessage));
         } catch (JMSException e) {
             e.printStackTrace();
         } catch (JAXBException e) {

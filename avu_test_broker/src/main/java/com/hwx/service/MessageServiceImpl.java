@@ -19,15 +19,11 @@ public class MessageServiceImpl implements MessageService {
     MessageBroker messageBroker;
 
     @Override
-    public String putMessage(Message message)  {
-        try {
-            message.setUid(UUID.randomUUID().toString());
-            message.setCreateDate(new Date());
-            String xmlMessageString = Message.toXml(message);
-            messageBroker.sendMessage(xmlMessageString);
-            return "OK";
-        } catch (JAXBException e) {
-            return "ERR";
-        }
+    public String putMessage(Message message) throws JAXBException {
+        message.setUid(UUID.randomUUID().toString());
+        message.setCreateDate(new Date());
+        String xmlMessageString = Message.toXml(message);
+        messageBroker.sendMessage(xmlMessageString);
+        return null;
     }
 }

@@ -35,7 +35,7 @@ public class AppController {
      */
     @PostMapping("/add")
     public String handleMessage(Message message, BindingResult result,
-                                ModelMap model) {
+                                ModelMap model) throws JAXBException {
         if (result.hasErrors()) {
             model.addAttribute("info_block", "failed on binding!");
             return "message_success";
